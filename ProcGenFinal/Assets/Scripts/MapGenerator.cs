@@ -37,6 +37,8 @@ public class MapGenerator : MonoBehaviour
 		float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
 		Color[] colorMap = new Color[mapWidth * mapHeight];
+		
+		//looping through our map
 		for (int y = 0; y < mapHeight; y++)
 		{
 			for (int x = 0; x < mapWidth; x++)
@@ -44,6 +46,9 @@ public class MapGenerator : MonoBehaviour
 				float CurrentHeight = noiseMap[x, y];
 				for (int i = 0; i < regions.Length; i++)
 				{
+					//setting our colors to the ones we chose from image
+					regions[i].color = ColorPicker.instance.colors[i];
+					
 					if (CurrentHeight<= regions[i].height)
 					{
 						colorMap[y * mapWidth + x] = regions[i].color;
@@ -51,10 +56,12 @@ public class MapGenerator : MonoBehaviour
 					}
 				}
 			}
+
 		}
 
 		MapDisplay display = FindObjectOfType<MapDisplay>();
 
+		//generating based on our drawmode
 		if (drawMode == DrawMode.NoiseMap)
 		{
 			display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
@@ -71,6 +78,7 @@ public class MapGenerator : MonoBehaviour
 
 	void OnValidate()
 	{
+		//value boundaries
 		if (mapWidth < 1)
 		{
 			mapWidth = 1;
@@ -96,6 +104,7 @@ public class MapGenerator : MonoBehaviour
 [System.Serializable]
 public struct TerrainType
 {
+	//custom constructor so we can define these values in the inspector
 	public string name;
 	public float height;
 	public Color color;

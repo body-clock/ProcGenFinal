@@ -8,7 +8,8 @@ public class MapDisplay : MonoBehaviour
 	public Renderer textureRenderer;
 	public MeshFilter meshFilter;
 	public MeshRenderer meshRenderer;
-
+	
+	//methods for displaying/drawing our mesh/texture
 	public void DrawTexture(Texture2D texture)
 	{
 		textureRenderer.sharedMaterial.mainTexture = texture;

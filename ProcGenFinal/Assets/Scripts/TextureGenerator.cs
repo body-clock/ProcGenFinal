@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class TextureGenerator{
-
+	
+	//creating texture from our color map
 	public static Texture2D TextureFromColorMap(Color[] colourMap, int width, int height)
 	{
 		Texture2D texture = new Texture2D(width, height);
@@ -14,6 +15,7 @@ public static class TextureGenerator{
 		return texture;
 	}
 
+	//creating texture from our height map
 	public static Texture2D TextureFromHeightMap(float[,] heightmap)
 	{
 		int width = heightmap.GetLength(0);
